@@ -259,10 +259,7 @@ const layer = Layer.effect(
 
     const describeTask = Effect.fn("ToolRegistry.describeTask")(function* (agent: Agent.Info) {
       const items = (yield* agents.list()).filter((item) => item.mode !== "primary")
-      const filtered = items.filter(
-        (item) => Permission.evaluate("task", item.name, agent.permission).action !== "deny",
-      )
-      const list = filtered.toSorted((a, b) => a.name.localeCompare(b.name))
+      const list = items.toSorted((a, b) => a.name.localeCompare(b.name))
       const description = list
         .map(
           (item) =>
